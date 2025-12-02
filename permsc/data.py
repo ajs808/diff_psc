@@ -335,6 +335,10 @@ class MSMarcoDataset(RankingDataset):
                 if len(parts) >= 4:
                     qid, pid = parts[0], parts[1]
                     
+                    # Initialize results for this query if needed
+                    if qid not in results:
+                        results[qid] = []
+                    
                     # Detect format: if 3rd column is numeric, it's Pyserini format
                     try:
                         float(parts[2])
@@ -354,15 +358,7 @@ class MSMarcoDataset(RankingDataset):
                         else:
                             rank += 1
                     
-                    # Reset rank tracking when query changes
-                    if current_qid != qid:
-                        current_qid = qid
-                        if qid not in results:
-                            results[qid] = []
-                    
                     results[qid].append((pid, query, passage, rank))
-                    if len(parts) == 4 and not parts[2].replace('.', '').replace('-', '').isdigit():
-                        rank += 1
         
         return results
     
