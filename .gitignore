@@ -1,0 +1,19 @@
+data/msmarco/*
+data/trec-dl19/*
+data/trec-dl20/*
+venv/*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
